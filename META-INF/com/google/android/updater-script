@@ -1,0 +1,19 @@
+META-INF/com/google/android/updater-script
+ui_print("===================================="
+ui_print("   INITIALIZING ISLE OF THE LOST OS   "
+ui_print("===================================="
+
+mount("ext4", "EMMC", "/dev/block/platform/mtk-msdc.0/by-name/system", "/system");
+
+delete("/system/app/VTechParentalControl.apk"
+delete("/system/app/LearningLodgeStore.apk"
+
+package_extract_dir("system", "/system");
+
+set_metadata_recursive("/system/app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644);
+set_metadata("/system/app/VK_Launcher.apk", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+
+unmount("/system");
+ui_print("====================================");
+ui_print("  VK MOD SUCCESSFUL! REBOOT NOW!    ");
+ui_print("====================================");

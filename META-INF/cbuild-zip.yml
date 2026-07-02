@@ -1,0 +1,29 @@
+name: Build Flashable Zip
+on: [push]
+
+jobs:
+  zip-generation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Line Ending Fixer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dos2unix
+
+      - name: Force Linux Line Endings (Foolproof Fix)
+        run: |
+          dos2unix META-INF/com/google/android/updater-script
+
+      - name: Compile Device-Ready Zip Archive
+        run: |
+          # Uses max deflate compression (-r9) required by legacy MediaTek chips
+          zip -r9 update.zip META-INF system
+
+      - name: Upload Finished Payload Asset
+        uses: actions/upload-artifact@v4
+        with:
+          name: KidiBuzz-Flashable-Update
+          path: update.zip

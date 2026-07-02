@@ -1,0 +1,7 @@
+├── .github/workflows/
+│   └── build-zip.yml 
+├── update-binary
+│   └── updater-script      
+├── system/app/
+├── system/app/
+│   └── VK_Launcher.apk 
